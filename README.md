@@ -2,6 +2,8 @@
 
 **A local-first Python exception flight recorder with deterministic crash fingerprints, bounded runtime-state snapshots, best-effort secret redaction, flight comparison, and editable pytest reproducer templates.**
 
+<p><sub>Built and maintained by <a href="https://verityagent.lovable.app"><strong>VerityAgent</strong></a> · AI agents, automation, and developer tools</sub></p>
+
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB.svg)](https://www.python.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen.svg)](pyproject.toml)
