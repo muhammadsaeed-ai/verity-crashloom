@@ -7,6 +7,10 @@
 [![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen.svg)](pyproject.toml)
 [![CI](https://github.com/muhammadsaeed-ai/crashloom/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammadsaeed-ai/crashloom/actions/workflows/ci.yml)
 
+<p align="center">
+  <img src="assets/readme/progress-loop.gif" alt="Animated workflow indicator for crashloom." width="420" />
+</p>
+
 CrashLoom helps Python developers preserve useful context from a failure, inspect it after the exception, and compare two recorded failures while debugging. Records live in a local SQLite database. No CrashLoom server or external telemetry service is required.
 
 ## Visual guide
