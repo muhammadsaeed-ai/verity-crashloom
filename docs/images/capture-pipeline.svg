@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520" role="img" aria-labelledby="title desc">
+<title id="title">CrashLoom exception capture pipeline</title>
+<desc id="desc">An error is observed by a CrashLoom entry point; traceback frames and variables are collected, serialized with limits and best-effort redaction, fingerprinted, saved to local SQLite, and the exception is re-raised by default.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#13223d"/></linearGradient>
+ <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0 L0 6 L9 3Z" fill="#60a5fa"/></marker>
+ <style>
+ .h{font:700 30px system-ui,sans-serif;fill:#f8fafc}.s{font:400 15px system-ui,sans-serif;fill:#b2c6dd}.t{font:700 17px system-ui,sans-serif;fill:#f8fafc}.b{font:400 13px system-ui,sans-serif;fill:#cbd5e1}.n{font:700 14px system-ui,sans-serif;fill:#07111f}
+ .card{fill:#12243b;stroke:#34516f;stroke-width:1.5}.edge{fill:none;stroke:#60a5fa;stroke-width:3;marker-end:url(#arr)}
+ </style>
+</defs>
+<rect width="1400" height="520" rx="24" fill="url(#bg)"/><circle cx="1330" cy="90" r="170" fill="#2563eb" opacity=".08"/>
+<text x="52" y="60" class="h">From exception to actionable flight record</text>
+<text x="54" y="88" class="s">Each stage narrows raw runtime state into a compact local debugging artifact.</text>
+<g>
+ <rect x="48" y="150" width="190" height="210" rx="16" class="card" stroke="#e879f9"/>
+ <circle cx="76" cy="178" r="15" fill="#e879f9"/><text x="76" y="183" text-anchor="middle" class="n">1</text>
+ <text x="68" y="222" class="t">Exception occurs</text><text x="68" y="252" class="b">Uncaught error,</text><text x="68" y="272" class="b">capture() block,</text><text x="68" y="292" class="b">or @watch wrapper</text>
+ <rect x="277" y="150" width="190" height="210" rx="16" class="card" stroke="#a78bfa"/>
+ <circle cx="305" cy="178" r="15" fill="#a78bfa"/><text x="305" y="183" text-anchor="middle" class="n">2</text>
+ <text x="297" y="222" class="t">Walk traceback</text><text x="297" y="252" class="b">Source filename +</text><text x="297" y="272" class="b">line number +</text><text x="297" y="292" class="b">function / frame</text>
+ <rect x="506" y="150" width="190" height="210" rx="16" class="card" stroke="#22d3ee"/>
+ <circle cx="534" cy="178" r="15" fill="#22d3ee"/><text x="534" y="183" text-anchor="middle" class="n">3</text>
+ <text x="526" y="222" class="t">Snapshot state</text><text x="526" y="252" class="b">Bound arguments,</text><text x="526" y="272" class="b">locals and source</text><text x="526" y="292" class="b">statement context</text>
+ <rect x="735" y="150" width="190" height="210" rx="16" class="card" stroke="#fbbf24"/>
+ <circle cx="763" cy="178" r="15" fill="#fbbf24"/><text x="763" y="183" text-anchor="middle" class="n">4</text>
+ <text x="755" y="222" class="t">Sanitize &amp; bound</text><text x="755" y="252" class="b">Mask sensitive keys</text><text x="755" y="272" class="b">and known patterns;</text><text x="755" y="292" class="b">limit size and depth</text>
+ <rect x="964" y="150" width="190" height="210" rx="16" class="card" stroke="#818cf8"/>
+ <circle cx="992" cy="178" r="15" fill="#818cf8"/><text x="992" y="183" text-anchor="middle" class="n">5</text>
+ <text x="984" y="222" class="t">Fingerprint</text><text x="984" y="252" class="b">Hash exception type,</text><text x="984" y="272" class="b">module/function and</text><text x="984" y="292" class="b">canonical statement</text>
+ <rect x="1193" y="150" width="159" height="210" rx="16" fill="#10352f" stroke="#34d399" stroke-width="1.5"/>
+ <circle cx="1221" cy="178" r="15" fill="#34d399"/><text x="1221" y="183" text-anchor="middle" class="n">6</text>
+ <text x="1213" y="222" class="t">Store locally</text><text x="1213" y="252" class="b">SQLite flight</text><text x="1213" y="272" class="b">record for</text><text x="1213" y="292" class="b">later inspection</text>
+ <path d="M238 250 H269 M467 250 H498 M696 250 H727 M925 250 H956 M1154 250 H1185" class="edge"/>
+</g>
+<rect x="48" y="396" width="1304" height="72" rx="14" fill="#211e31" stroke="#6d5aa6"/>
+<circle cx="78" cy="432" r="11" fill="#c4b5fd"/><path d="M73 432 l4 4 l7 -9" fill="none" stroke="#2a1d46" stroke-width="2.5"/>
+<text x="101" y="427" class="t">Exception behavior remains visible</text><text x="101" y="450" class="b">CrashLoom re-raises by default; recording should not silently turn a failing run into a passing one.</text>
+</svg>
