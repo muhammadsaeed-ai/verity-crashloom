@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+import math
 from typing import Any
 
 from crashloom.models import SerializedValue
@@ -45,7 +46,7 @@ class SafeSerializer:
                 summary=REDACTED_MASK,
             )
 
-        if value is None or isinstance(value, (bool, int, float)):
+        if value is None or isinstance(value, (bool, int)):
             rendered = repr(value)
             return SerializedValue(
                 type_name=type_name,
@@ -53,6 +54,23 @@ class SafeSerializer:
                 is_reconstructible=True,
                 python_expr=rendered,
                 summary=value,
+            )
+
+        if isinstance(value, float):
+            rendered = repr(value)
+            if math.isnan(value):
+                expression, summary = "float('nan')", "nan"
+            elif math.isinf(value):
+                summary = "-inf" if value < 0 else "inf"
+                expression = "float('-inf')" if value < 0 else "float('inf')"
+            else:
+                expression, summary = rendered, value
+            return SerializedValue(
+                type_name=type_name,
+                repr_str=rendered,
+                is_reconstructible=True,
+                python_expr=expression,
+                summary=summary,
             )
 
         if isinstance(value, str):
