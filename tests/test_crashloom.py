@@ -31,6 +31,23 @@ class TestCrashLoom(unittest.TestCase):
         self.assertNotIn("sensitive-value", serialized.repr_str)
         self.assertNotIn("sensitive-value", json.dumps(serialized.to_dict()))
 
+
+    def test_non_finite_float_expressions_are_valid_and_json_safe(self):
+        serializer = SafeSerializer()
+        cases = [
+            (float("nan"), "float('nan')", "nan"),
+            (float("inf"), "float('inf')", "inf"),
+            (float("-inf"), "float('-inf')", "-inf"),
+        ]
+        for value, expression, summary in cases:
+            with self.subTest(value=summary):
+                serialized = serializer.serialize(value)
+                self.assertTrue(serialized.is_reconstructible)
+                self.assertEqual(serialized.python_expr, expression)
+                self.assertEqual(serialized.summary, summary)
+                compile(serialized.python_expr, "<crashloom-expression>", "eval")
+                json.dumps(serialized.to_dict(), allow_nan=False)
+
     def test_capture_reraises_and_records(self):
         with tempfile.TemporaryDirectory() as tmp:
             database = Path(tmp) / "flights.db"
