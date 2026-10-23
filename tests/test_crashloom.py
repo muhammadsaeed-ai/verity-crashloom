@@ -25,6 +25,19 @@ class TestCrashLoom(unittest.TestCase):
         self.assertTrue(changed)
         self.assertNotIn("super-secret-value", clean)
 
+
+    def test_generic_token_identifiers_are_redacted(self):
+        redactor = SecretRedactor()
+        for identifier in ("token", "id_token", "apiToken", "jwt"):
+            with self.subTest(identifier=identifier):
+                self.assertTrue(redactor.is_sensitive_identifier(identifier))
+                serialized = SafeSerializer(redactor).serialize("opaque-private-value", identifier)
+                self.assertTrue(serialized.redacted)
+                self.assertNotIn("opaque-private-value", serialized.repr_str)
+        clean, changed = redactor.redact_string("token=opaque-private-value")
+        self.assertTrue(changed)
+        self.assertNotIn("opaque-private-value", clean)
+
     def test_nested_structures_redact_sensitive_keys(self):
         serialized = SafeSerializer().serialize({"config": {"api_key": "sensitive-value", "enabled": True}})
         self.assertTrue(serialized.redacted)
