@@ -8,7 +8,7 @@ from typing import Final
 REDACTED_MASK: Final[str] = "<REDACTED_BY_CRASHLOOM>"
 SENSITIVE_KEY_PATTERNS: Final[tuple[str, ...]] = (
     "password", "passwd", "pwd", "secret", "api_key", "apikey", "access_key",
-    "private_key", "client_secret", "auth_token", "access_token", "refresh_token",
+    "private_key", "client_secret", "auth_token", "access_token", "refresh_token", "token", "jwt",
     "bearer", "authorization", "dsn", "database_url", "stripe_key", "openai_api_key",
 )
 
@@ -28,7 +28,7 @@ SECRET_VALUE_REGEXES: Final[tuple[tuple[str, re.Pattern[str]], ...]] = (
 SECRET_ASSIGNMENT_REGEX: Final[re.Pattern[str]] = re.compile(
     r"(?i)(?P<prefix>['\"]?(?:api[-_ ]?key|apikey|access[-_ ]?key|private[-_ ]?key|"
     r"client[-_ ]?secret|openai[-_ ]?api[-_ ]?key|stripe[-_ ]?key|password|passwd|pwd|"
-    r"secret|access[-_ ]?token|refresh[-_ ]?token|auth[-_ ]?token|authorization|bearer|"
+    r"secret|access[-_ ]?token|refresh[-_ ]?token|auth[-_ ]?token|api[-_ ]?token|id[-_ ]?token|token|jwt|authorization|bearer|"
     r"database[-_ ]?url|dsn)['\"]?\s*[:=]\s*)"
     r"(?P<value>\"[^\"]*\"|'[^']*'|[^,\s;&}]+)"
 )
