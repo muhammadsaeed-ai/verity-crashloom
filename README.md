@@ -7,7 +7,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776AB.svg)](https://www.python.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen.svg)](pyproject.toml)
-[![CI](https://github.com/muhammadsaeed-ai/crashloom/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammadsaeed-ai/crashloom/actions/workflows/ci.yml)
+[![CI](https://github.com/muhammadsaeed-ai/verity-crashloom/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammadsaeed-ai/verity-crashloom/actions/workflows/ci.yml)
 
 <p align="center">
   <img src="assets/readme/progress-loop.gif" alt="Animated workflow indicator for crashloom." width="420" />
@@ -59,7 +59,7 @@ Start by recording a reproducible failure, inspect the flight to understand the 
 Requires Python 3.10 or newer.
 
 \`\`\`bash
-git clone https://github.com/muhammadsaeed-ai/crashloom.git
+git clone https://github.com/muhammadsaeed-ai/verity-crashloom.git
 cd crashloom
 python -m pip install -e .
 \`\`\`
